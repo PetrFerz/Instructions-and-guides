@@ -1,4 +1,5 @@
 # Kyve node
+kyve1zzjf4f0lvcnguf9lfzryje4zcqrkre77jpj87y
 
 Нода Kyve очень не требовательна в плане железа, поэтому подойдет сервер с очень дешевой конфигурацией, например CX21 на https://www.hetzner.com/cloud
 
