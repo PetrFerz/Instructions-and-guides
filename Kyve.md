@@ -5,6 +5,36 @@ kyve1zzjf4f0lvcnguf9lfzryje4zcqrkre77jpj87y
 
 Перед установкой узла вам нужно получить немного токенов AR. Для этого вам понадобится аккаунт в  твиттере. Зайдите на [сайт](https://faucet.arweave.net/), проставьте галки, затем скачайте "json" файл и переименуйте его в "arweave.json". Нажмите на "Open tweet pop-up" и опубликуйте твит. Через некоторое время вы получите небольше количество токенов AR. Затем скопируйте этот файл к себе на сервер с помощью scp или filezilla в домашнюю папку.
 
+### 1. Автоматическая установка
+
+```
+wget https://raw.githubusercontent.com/PetrFerz/Instructions-and-guides/main/Kyve.sh
+bash Kyve.sh
+
+```
+выбирите
+
+1 - установка пакетов, бинарных файлов, создание сервисов.
+
+2 - выход из меню
+
+затем запустите нужный вам пул, например avalanche
+
+```
+systemctl restart avalanche
+```
+При необходимости вы можете изменить количество застейканных токенов
+
+```
+STAKE=NEW_STAKE
+sed -i.bak -e "s/initialStake .*/initialStake $STAKE/" /etc/systemd/system/avalanche.service
+systemctl daemon-reload
+systemctl restart avalanche
+
+```
+
+### 2. Ручная установка
+
 Подготовка сервера.
 ```
 sudo apt-get update
@@ -35,8 +65,8 @@ wget -O kyve-evmos-linux.zip https://github.com/kyve-org/evm/releases/download/v
 
 ```
 unzip -o "*.zip"
-chmod +x evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-celo-linux  kyve-near-linux kyve-evm-linux
-mv evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-near-linux kyve-evm-linux  kyve-celo-linux /usr/local/bin/
+chmod +x kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-celo-linux  kyve-near-linux kyve-evm-linux
+mv kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-near-linux  kyve-celo-linux /usr/local/bin/
 
 ```
 
@@ -56,7 +86,7 @@ After=network.target
 [Service]
 User=$USER
 Type=simple
-ExecStart=$(which evm-linux) --poolId 0 --mnemonic \"$MNEMONIC\" --keyfile $HOME/arweave.json --initialStake $STAKE
+ExecStart=$(which kyve-evm-linux) --poolId 0 --mnemonic \"$MNEMONIC\" --keyfile $HOME/arweave.json --initialStake $STAKE
 Restart=on-failure
 LimitNOFILE=65535
 unzip -o "*.zip"
@@ -75,7 +105,7 @@ After=network.target
 [Service]
 User=$USER
 Type=simple
-ExecStart=$(which evm-linux) --poolId 1 --mnemonic \"$MNEMONIC\" --keyfile $HOME/arweave.json --initialStake $STAKE
+ExecStart=$(which kyve-evm-linux) --poolId 1 --mnemonic \"$MNEMONIC\" --keyfile $HOME/arweave.json --initialStake $STAKE
 Restart=on-failure
 LimitNOFILE=65535
 
@@ -125,6 +155,10 @@ WantedBy=multi-user.target" > $HOME/kyve/service/solana.service
 пул Zilliqa
 
 ```
+echo "[Unit]
+Description=zilliqa
+After=network.target
+
 [Service]
 User=$USER
 Type=simple
@@ -183,7 +217,7 @@ After=network.target
 [Service]
 User=$USER
 Type=simple
-ExecStart=$(which evm-linux) --poolId 8 --mnemonic \"$MNEMONIC\" --keyfile $HOME/arweave.json --initialStake $STAKE
+ExecStart=$(which kyve-evm-linux) --poolId 8 --mnemonic \"$MNEMONIC\" --keyfile $HOME/arweave.json --initialStake $STAKE
 Restart=on-failure
 LimitNOFILE=65535
 
