@@ -37,9 +37,9 @@ systemctl restart avalanche
 
 Подготовка сервера.
 ```
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt install unzip
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt install unzip -y
 
 ```
  
@@ -58,14 +58,13 @@ wget -O kyve-zilliqa-linux.zip https://github.com/kyve-org/zilliqa/releases/down
 wget -O stacks-linux.zip https://github.com/kyve-org/stacks/releases/download/v0.0.2/stacks-linux.zip
 wget -O celo-linux.zip https://github.com/kyve-org/celo/releases/download/v0.0.0/kyve-celo-linux.zip
 wget -O near-linux.zip https://github.com/kyve-org/near/releases/download/v0.0.1/kyve-near-linux.zip
-wget -O kyve-evmos-linux.zip https://github.com/kyve-org/evm/releases/download/v1.0.5/kyve-evm-linux.zip
 
 ```
 Распакуйте архивы, затем сделате бинарные файлы исполняемыми и перенесите их в папку /usr/local/bin/
 
 ```
 unzip -o "*.zip"
-chmod +x kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-celo-linux  kyve-near-linux kyve-evm-linux
+chmod +x kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-celo-linux  kyve-near-linux
 mv kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-near-linux  kyve-celo-linux /usr/local/bin/
 
 ```
