@@ -97,7 +97,7 @@ After=network.target
 [Service]
 User=$USER
 Type=simple
-ExecStart=$(which kyve-bitcoin-linux) --poolId 3 --mnemonic \"$MNEMONIC\" --keyfile $HOME/arweave.json --initialStake $STAKE
+ExecStart=$(which bitcoin-linux) --poolId 3 --mnemonic \"$MNEMONIC\" --keyfile $HOME/arweave.json --initialStake $STAKE
 Restart=on-failure
 LimitNOFILE=65535
 
