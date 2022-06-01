@@ -12,7 +12,7 @@ else
 fi
 bash_profile=$HOME/.bash_profile
 if [ -f "$bash_profile" ]; then
-    . $HOME/.bash_profile
+    source $HOME/.bash_profile
 fi
 
 function setup_Vars {
@@ -55,8 +55,8 @@ function install_Software {
 	wget -O kyve-evmos-linux.zip https://github.com/kyve-org/evm/releases/download/v1.0.5/kyve-evm-linux.zip
 	sleep 1s
 	unzip -o "*.zip"
-	chmod +x kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-celo-linux  kyve-near-linux kyve-evm-linux
-	mv kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-near-linux kyve-evm-linux  kyve-celo-linux /usr/local/bin/
+	chmod +x kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-celo-linux kyve-near-linux
+	mv kyve-evm-linux kyve-solana-linux kyve-zilliqa-linux bitcoin-linux stacks-linux kyve-near-linux kyve-celo-linux /usr/local/bin/
 }
 
 function install_Service {
